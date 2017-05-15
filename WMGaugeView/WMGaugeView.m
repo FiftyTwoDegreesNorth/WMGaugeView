@@ -75,6 +75,7 @@
     _scaleSubdivisions = 10.0;
     _showScale = YES;
     _showScaleShadow = YES;
+    _showScaleText = YES;
     _scalesubdivisionsAligment = WMGaugeViewSubdivisionsAlignmentTop;
     _scaleDivisionsLength = 0.045;
     _scaleDivisionsWidth = 0.01;
@@ -279,14 +280,17 @@
             CGContextStrokePath(context);
             
             // Draw label
-            NSString *valueString = [NSString stringWithFormat:@"%0.0f",value];
-            UIFont* font = _scaleFont ? _scaleFont : [UIFont fontWithName:@"Helvetica-Bold" size:0.05];
-            NSDictionary* stringAttrs = @{ NSFontAttributeName : font, NSForegroundColorAttributeName : color };
-            NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:valueString attributes:stringAttrs];
-            CGSize fontWidth;
-            fontWidth = [valueString sizeWithAttributes:stringAttrs];
+            if (_showScaleText)
+            {
+                NSString *valueString = [NSString stringWithFormat:@"%0.0f",value];
+                UIFont* font = _scaleFont ? _scaleFont : [UIFont fontWithName:@"Helvetica-Bold" size:0.05];
+                NSDictionary* stringAttrs = @{ NSFontAttributeName : font, NSForegroundColorAttributeName : color };
+                NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:valueString attributes:stringAttrs];
+                CGSize fontWidth;
+                fontWidth = [valueString sizeWithAttributes:stringAttrs];
             
-            [attrStr drawAtPoint:CGPointMake(0.5 - fontWidth.width / 2.0, y3 + 0.005)];
+                [attrStr drawAtPoint:CGPointMake(0.5 - fontWidth.width / 2.0, y3 + 0.005)];
+            }
         }
         // Subdivision
         else
@@ -644,6 +648,11 @@
 {
     _showScale = showScale;
     [self invalidateBackground];
+}
+
+- (void)setShowScaleText:(bool)showScaleText
+{
+    _showScaleText = showScaleText;
 }
 
 - (void)setScalesubdivisionsAligment:(WMGaugeViewSubdivisionsAlignment)scalesubdivisionsAligment
