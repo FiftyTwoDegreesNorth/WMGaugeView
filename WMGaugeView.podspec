@@ -7,8 +7,8 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author             = { "William Markezana" => "william.markezana@me.com" }
   s.source       = { 
-    :git => "https://github.com/FiftyTwoDegreesNorth/WMGaugeView.git"
-    :branch => 'scale_styling' 
+    :git => "https://github.com/FiftyTwoDegreesNorth/WMGaugeView.git",
+    :branch => 'scalestyling' 
   }
   s.source_files  = 'WMGaugeView', 'WMGaugeView/WMGaugeView*.{h,m}'
   s.framework  = 'UIKit'
